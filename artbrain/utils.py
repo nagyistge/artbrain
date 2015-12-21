@@ -19,9 +19,7 @@ def read_png(png_image):
     bitdepth=meta['bitdepth']
     plane_count=meta['planes']
     image_2d = numpy.vstack(itertools.imap(numpy.uint16, pngdata))
-    # If "image_plane" == 4, this means an alpha layer, take 3 for RGB
-    # Need to debug this - removing wrong layer I think
-    #image_2d=image_2d[:,0:column_count*3]
+    # If "image_plane" == 4, this means an alpha layer
     for row_index, one_boxed_row_flat_pixels in enumerate(pngdata):
         image_2d[row_index,:]=one_boxed_row_flat_pixels
     image_3d = numpy.reshape(image_2d,(row_count,column_count,plane_count))

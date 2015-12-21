@@ -45,8 +45,18 @@ Merry Christmas 2015!
 
 <body>
     <div class="container">
-        <div class="row">
-            <div class="alert alert-info" role="alert">Brought to you with <icon class="fa fa-2x fa-heart"></icon> <a href="https://poldracklab.stanford.edu" target="_blank">Poldracklab</a> <a href="https://github.com/vsoch/artbrain" target="_blank"><icon class="fa fa-2x fa-github"></icon></a></div>
+        <div class="row alert alert-info" role="alert">
+            <div class="col-md-6">
+            Brought to you with <icon class="fa fa-2x fa-heart"></icon> <a href="https://poldracklab.stanford.edu" target="_blank">Poldracklab</a> <a href="https://github.com/vsoch/artbrain" target="_blank">
+            </div>
+            <div class="col-md-4">
+                <form method="GET" action="{{DATA}}">
+                    <button class="btn btn-sm btn-primary" type="submit">Download</button>
+                </form>
+            </div>
+            <div class="col-md-2">
+                <icon style="float:right" class="fa fa-2x fa-github"></icon></a>
+            </div>    
         </div>
         <div class="row">
             <div class="papaya" data-params="params"></div>	

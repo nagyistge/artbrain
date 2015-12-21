@@ -27,7 +27,7 @@ def read_png(png_image):
     image_3d = numpy.reshape(image_2d,(row_count,column_count,plane_count))
     return image_3d
 
-def map_to_brain(image_3d,brain_mask,axis="axial"):
+def map_to_brain(image_3d,brain_mask,axis="axial",rotations=3):
     '''map_to_brain
     map 3d data matrix onto a brain_mask, specified by axis. If axis is not valid, will return False. If valid, will return nibabel.Nifti1Image
     :param image_3d: numpy array read in from read_png. Usually of shape (512, 512, N), where N is 3 for 3D image, and 4 for png with alpha. If an alpha channel is found, pixels with 0 alpha will be rendered as transparent (0).
@@ -45,6 +45,7 @@ def map_to_brain(image_3d,brain_mask,axis="axial"):
 
     # Normalize
     rgb = (rgb - rgb.mean()) / rgb.std()
+    rgb = numpy.rot90(rgb, k=rotations)
 
     # Houston, we have alpha!
     alpha_channel = False
@@ -56,6 +57,11 @@ def map_to_brain(image_3d,brain_mask,axis="axial"):
         height = brain_mask.shape[1]
     else:
         print "Invalid specification of atlas, %s. Currently only supported is axial." %axis
+        return False
+
+    # Only square images, sorry
+    if rgb.shape[0] != rgb.shape[1]:
+        print "Sorry, only square images are currently supported."
         return False
 
     # We will interpolate down the largest dimension of the image
@@ -82,7 +88,10 @@ def map_to_brain(image_3d,brain_mask,axis="axial"):
     # This is slow and stupid, but it will work
     for x in range(width):
         for y in range(height):
-            array[x,y] = padded[x,y]
+            try:
+                array[x,y] = padded[x,y]
+            except:
+                pass
 
     # Let's write the image to all slices
     empty_brain = numpy.zeros(brain_mask.shape)

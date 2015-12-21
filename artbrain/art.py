@@ -18,7 +18,7 @@ import os
 
 base = get_packagedir() 
 
-def generate(template,output_folder=None,orthoview="axial",view=True,port=None):
+def generate(template,output_folder=None,orthoview="axial",view=True,port=None,rotations=3):
     '''generate
     create an artbrain image
 
@@ -36,7 +36,7 @@ def generate(template,output_folder=None,orthoview="axial",view=True,port=None):
     image_3d = read_png(template)
 
     # Map onto brain!
-    nii = map_to_brain(image_3d,brain_mask,axis=orthoview)
+    nii = map_to_brain(image_3d,brain_mask,axis=orthoview,rotations=rotations)
 
     # Save output to file
     new_image_name = os.path.splitext(os.path.split(template)[-1])[0]

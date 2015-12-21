@@ -19,6 +19,7 @@ def main():
     parser.add_argument('--nopreview', dest='nopreview', help="don't view output in browser", default=False, action='store_true')
     parser.add_argument("--output-folder", dest='output', help="output folder for html file", type=str, default=None)
     parser.add_argument("--port", dest='port', help="port for preview, if view is True", type=int, default=None)
+    parser.add_argument("--rotate", dest='rotations', help="counter-clockwise rotations (default is 3 for upright)", type=int, default=3)
 
     try:
         args = parser.parse_args()
@@ -37,4 +38,5 @@ def main():
     generate(template=args.image,
              output_folder=args.output,
              view=preview,
-             port=args.port)
+             port=args.port,
+             rotations=args.rotations)

@@ -4,6 +4,8 @@ Draw png images onto brain maps. Inspired by a first go at creating "brainilism"
 
 ![img/santa.png](img/santa.png)
 
+See our [gallery in NeuroVault](http://neurovault.org/collections/1028/)
+
 ### Installation
 
       pip install artbrain
